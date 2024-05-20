@@ -99,30 +99,15 @@ class VisualLanguageAPI():
     
     def extract_tuple(self, response):
         answer = response
-        pattern = r"\(Mode: (.*?), Parameter: (.*?), Value: (.*?)\)"
-        match = re.match(pattern, answer)
-        high_level_task = task_plan()  # Ensure task_plan is properly defined or imported
-
-        if match:
-            mode, parameter, value = match.groups()
+        ### TODO 2 ###
+        ### Extract each result from Mode, Parameter, and Value ###
+        ### Hint: Publsih each result using self.task_planner ###
             
-            try:
-                value = float(value)
-            except ValueError:
-                # print(f"Error: Value '{value}' is not a float, setting to 0.0")
-                value = 0.0
-
-            high_level_task.mode = mode
-            high_level_task.parameter = parameter
-            high_level_task.value = value
-
-            self.task_planner.publish(high_level_task)
-            
-            print("Mode:", mode)
-            print("Parameter:", parameter)
-            print("Value:", value)
-        else:
-            print("No match found")
+            # print("Mode:", mode)
+            # print("Parameter:", parameter)
+            # print("Value:", value)
+        # else:
+            # print("No match found")
             
 def main():
     print("Current version of openai == ", pkg_resources.get_distribution("openai").version)
