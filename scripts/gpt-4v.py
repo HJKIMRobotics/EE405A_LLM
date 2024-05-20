@@ -17,7 +17,6 @@ class VisualLanguageAPI():
     def __init__(self):
         rospy.init_node('vision_language')
         self.package_path = rospkg.RosPack().get_path('llm')
-        # rospy.Subscriber('/camera/color/image_raw', Image, self.image_callback, queue_size = 1)
         rospy.Subscriber('/vision_query', String, self.query_callback, queue_size = 1)
         
         self.task_planner = rospy.Publisher('/task_plan', task_plan, queue_size=1)
@@ -40,7 +39,6 @@ class VisualLanguageAPI():
     def apply_prompt(self):
         with open(self.package_path + "/api_key/" + "prompt.txt") as file:
             prompt = file.read().strip()
-            # print(prompt)
         return prompt
         
     def query_callback(self, msg):
@@ -61,7 +59,6 @@ class VisualLanguageAPI():
             print("Image not saved yet or service call failed...")
         
     def encode_image_file(self, image_path):
-        # print("Attempting to open image_path:", image_path)  # Debug print
         with open(image_path, "rb") as image_file:
             image_content = image_file.read()
             encode = base64.b64encode(image_content).decode('utf-8')
@@ -103,11 +100,7 @@ class VisualLanguageAPI():
         ### Extract each result from Mode, Parameter, and Value ###
         ### Hint: Publsih each result using self.task_planner ###
             
-            # print("Mode:", mode)
-            # print("Parameter:", parameter)
-            # print("Value:", value)
-        # else:
-            # print("No match found")
+            
             
 def main():
     print("Current version of openai == ", pkg_resources.get_distribution("openai").version)
